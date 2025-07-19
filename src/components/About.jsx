@@ -5,7 +5,7 @@ const About = () => {
     <>
       <div id="about" className="container mx-auto flex flex-wrap w-full py-10 gap-6 sm:gap-0 sm:px-8 lg:justify-center">
         <div className="sm:w-[40%] lg:w-[30%] flex justify-center">
-          <img className="w-[80%] sm:w-full" src="/slice.png" alt="slice cake" />
+          <img className="w-[80%] sm:w-full" src="./slice.png" alt="slice cake" loading="lazy"/>
         </div>
 
         <div className="sm:w-[60%] lg:w-[50%] text-center flex flex-col justify-center items-center">
