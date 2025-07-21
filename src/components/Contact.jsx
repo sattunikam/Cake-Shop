@@ -16,7 +16,7 @@ const Contact = () => {
     const data = await response.data;
 
     if (data.success) {
-      setResult("Form Submitted Successfully");
+      setResult("Submitted");
       toast.success("Form Submitted Successfully");
       event.target.reset();
     } else {
@@ -65,7 +65,7 @@ const Contact = () => {
 
             <div className="flex space-x-2 ">
               <input
-                type="submit"
+                type="Submit"
                 value={result ? result : "submit"}
                 className="px-4 mt-2 md:mt-4 md:px-8 hover:bg-blue-950 cursor-pointer font-bold border-0 rounded py-2 bg-emerald-400 text-white"
               />
