@@ -9,7 +9,11 @@ const paymentRoutes = require("./routes/PaymentRoutes")
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
+const MONGO_URL = process.env.MONGO_URL;
 const port = 3000;
+
+// Proxy support for Render / production:
+app.set('trust proxy', 1); // secure cookies + rate-limit IP detection
 
 app.use(
   cors({
@@ -18,12 +22,14 @@ app.use(
   })
 );
 
+// Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 मिनिटांची window
   max: 60,                 // त्या window मध्ये एका IP वरून max 100 requests
   message: "Too many requests, please try again later.",
 });
 
+// Security middlewares
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
@@ -32,9 +38,10 @@ app.use("/api", routes);//CustomerRoutes.js
 app.use("/api", paymentRoutes)//PaymentRoutes.js
 app.use(limiter);
 
+// Connect to DB
 const dbstart = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/cakeshop");
+    await mongoose.connect(MONGO_URL);
     console.log("DB Successfully Connected");
   } catch (error) {
     console.log(error);
@@ -55,4 +62,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Something went wrong!" });
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
