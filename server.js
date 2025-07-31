@@ -5,7 +5,7 @@ const cors = require("cors");
 const routes = require("./routes/CustomerRoutes");
 const cookieParser = require("cookie-parser");
 const adminRoutes = require("./routes/AdminRoutes");
-const paymentRoutes = require("../server/routes/PaymentRoutes")
+const paymentRoutes = require("./routes/PaymentRoutes")
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
